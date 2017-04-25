@@ -81,19 +81,26 @@ A CPU Cost Function is computed by using trial-and-error, which is costly in ter
 <br><br>
  Here is an example HashCash header: 1:20:1303030600:adam@cypherspace.org::McMybZIhxKXu57jd:ckvi
 <br>
-The first field indicates the HashCash format version, in this case it is 1.
-The second field indicates the number of partial pre-image bits, also known ast he number of zeroes that precede the hashed code.
-The third field is a timestamp which indicates when the message was sent.
-The fourth field indicates the resource data string being transmitted, for example, an IP address or email address.
-The fifth field indicates an extension, which includes miscellaneous data being transmitted.
-The sixth field indicates a random string of characters encoded in base-64 format.
-The seventh field indicates a binary counter (up to 2^20) encoded in base-64 format.
+The first field indicates the HashCash format version. (1)
 <br>
+The second field indicates the number of partial pre-image bits, also known as the number of zeroes that precede the hashed code. (20)
+<br>
+The third field is a timestamp which indicates when the message was sent. (1303030600)
+<br>
+The fourth field indicates the resource data string being transmitted, for example, an IP address or email address. (adam@cypherspace.org)
+<br>
+The fifth field indicates an extension, which includes miscellaneous data being transmitted.()
+<br>
+The sixth field indicates a random string of characters encoded in base-64 format. (McMybZIhxKXu57jd)
+<br>
+The seventh field indicates a binary counter (up to 2^20) encoded in base-64 format. (ckvi)
+<br>
+</p>
 
+<p>
 In order to prepare a valid proof of work, a sender must prepare a header and append a counter value initialized to a random number. It then computes a 160-bit SHA-1 hash of this header. If the first 20 bits of the hash are zeroes, this is a valid header. If not, the sender increments the counter and tries again. It would take around 2^20 tries before a valid header is found. With reasonable estimates, a valid header would take about 1 second to find.
 <br>
-
-To verify whetehr or not a header is valid, the recipient calculates the 160-bit SHA-1 hash of the entire string, if the first 20 bits are all zero, this is a valid header. Next, the recipient checks the date in the header, if the time stamp is more than two days old, the header is invalid. This two-day window compensates for differences in time zones and latency. Then, the recipient checks whether the email address in the header matches any email addresses registered by the recipient. If a match is not found, the header is invalid. Finally, the recipient inserts the hash string into a database, if the string is already in the database, then the string is invalid. If the header passes all of these tests, it will be considered a valid hash string.
+To verify whether or not a header is valid, the recipient calculates the 160-bit SHA-1 hash of the entire string, if the first 20 bits are all zero, this is a valid header. Next, the recipient checks the date in the header, if the time stamp is more than two days old, the header is invalid. This two-day window compensates for differences in time zones and latency. Then, the recipient checks whether the email address in the header matches any email addresses registered by the recipient. If a match is not found, the header is invalid. Finally, the recipient inserts the hash string into a database, if the string is already in the database, then the string is invalid. If the header passes all of these tests, it will be considered a valid hash string.
 
 
 </body>
